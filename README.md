@@ -7,15 +7,15 @@ class PasswordChecker
     static void Main()
     {
         // Example Registration Number (replace with actual registration number)
-        string registrationNumber = "017";
+        string registrationNumber = "039";
 
         // Example Name (replace with your actual name)
-        string name = "AkashaLoulak";
-      
+        string name = "RiddaZainab";
+
         // User Input for Password
         Console.Write("Enter your password: ");
         string password = Console.ReadLine();
-      
+
 
         // Ensure the password is not empty
         if (string.IsNullOrEmpty(password))
