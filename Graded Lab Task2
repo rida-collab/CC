@@ -1,0 +1,33 @@
+using System;
+using System.Text.RegularExpressions;
+
+namespace RelationalOperatorRegex
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Input string for testing relational operators
+            string input = "a > b && c <= d || e == f && g != h";
+
+            // Regular expression for relational operators
+            string pattern = @"==|!=|>=|<=|>|<";
+
+            // Create a Regex object
+            Regex regex = new Regex(pattern);
+
+            // Match all occurrences of relational operators in the input string
+            MatchCollection matches = regex.Matches(input);
+
+            // Print all the matches
+            Console.WriteLine("Found relational operators:");
+            foreach (Match match in matches)
+            {
+                Console.WriteLine(match.Value);
+            }
+
+            // Wait for user to press a key before closing
+            Console.ReadKey();
+        }
+    }
+}
