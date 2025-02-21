@@ -1,0 +1,134 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+// Function to classify and handle keywords and identifiers
+void classify_word(char *str, FILE *keywords_file, FILE *identifiers_file) {
+    // List of C keywords
+    if (strcmp("for", str) == 0 || strcmp("while", str) == 0 || strcmp("do", str) == 0 ||
+        strcmp("int", str) == 0 || strcmp("float", str) == 0 || strcmp("char", str) == 0 ||
+        strcmp("double", str) == 0 || strcmp("static", str) == 0 || strcmp("switch", str) == 0 ||
+        strcmp("case", str) == 0 || strcmp("return", str) == 0 || strcmp("if", str) == 0 || 
+        strcmp("else", str) == 0) {
+        fprintf(keywords_file, "Keyword: %s\n", str);
+    } else {
+        fprintf(identifiers_file, "Identifier: %s\n", str);
+    }
+}
+
+// Main function
+int main() {
+    FILE *f1, *keywords_file, *identifiers_file, *operators_file, *numbers_file, *special_chars_file, *header_file;
+    char c, str[100];
+    int num[100], lineno = 1, wordno = 1, tokenvalue = 0, i = 0, j = 0, k = 0;
+
+    // Open input file (C program file to be analyzed)
+    f1 = fopen("lexicalanalyzer.cpp", "r");
+    if (f1 == NULL) {
+        printf("Could not open file 'lexicalanalyzer.cpp'\n");
+        return 1;
+    }
+
+    // Create separate output files for keywords, identifiers, operators, numbers, special characters, and header files
+    keywords_file = fopen("keywords.txt", "w");
+    identifiers_file = fopen("identifiers.txt", "w");
+    operators_file = fopen("operators.txt", "w");
+    numbers_file = fopen("numbers.txt", "w");
+    special_chars_file = fopen("special_chars.txt", "w");
+    header_file = fopen("header_files.txt", "w");
+
+    // Process each character in the source code file
+    while ((c = getc(f1)) != EOF) {
+        // Detect numbers
+        if (isdigit(c)) {
+            tokenvalue = c - '0';
+            c = getc(f1);
+            while (isdigit(c)) {
+                tokenvalue = tokenvalue * 10 + (c - '0');
+                c = getc(f1);
+            }
+            num[i++] = tokenvalue;
+            fprintf(numbers_file, "Line %d, Word %d: Number: %d\n", lineno, wordno++, tokenvalue);
+            ungetc(c, f1);
+        }
+        // Detect identifiers and keywords
+        else if (isalpha(c) || c == '_') {
+            str[k++] = c;
+            c = getc(f1);
+            while (isdigit(c) || isalpha(c) || c == '_' || c == '$') {
+                str[k++] = c;
+                c = getc(f1);
+            }
+            str[k] = '\0';
+            classify_word(str, keywords_file, identifiers_file);
+            printf("Line %d, Word %d: %s\n", lineno, wordno++, str);  // Output word with line and word number
+            k = 0;
+            ungetc(c, f1);
+        }
+        // Detect operators
+        else if (c == '+' || c == '-' || c == '*' || c == '/' || c == '=' || c == '>' ||
+                 c == '<' || c == '!' || c == '%' || c == '&' || c == '|' || c == '^') {
+            fprintf(operators_file, "Line %d, Word %d: Operator: %c\n", lineno, wordno++, c);
+        }
+        // Detect header files (e.g., #include <stdio.h>)
+        else if (c == '#') {
+            c = getc(f1);
+            if (c == 'i') {
+                c = getc(f1);
+                if (c == 'n') {
+                    c = getc(f1);
+                    if (c == 'c') {
+                        c = getc(f1);
+                        if (c == 'l') {
+                            c = getc(f1);
+                            if (c == 'u') {
+                                c = getc(f1);
+                                if (c == 'd') {
+                                    c = getc(f1);
+                                    if (c == 'e') {
+                                        c = getc(f1);
+                                        if (c == '<') {
+                                            char header[100];
+                                            int j = 0;
+                                            c = getc(f1);
+                                            while (c != '>' && c != EOF) {
+                                                header[j++] = c;
+                                                c = getc(f1);
+                                            }
+                                            header[j] = '\0';
+                                            fprintf(header_file, "Line %d, Word %d: Header File: <%s>\n", lineno, wordno++, header);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Detect special characters (e.g., punctuation, braces, etc.)
+        else if (c == ' ' || c == '\t') {
+            continue;
+        }
+        else if (c == '\n') {
+            lineno++;
+            wordno = 1;  // Reset word count for the new line
+        }
+        else {
+            fprintf(special_chars_file, "Line %d, Word %d: Special Character: %c\n", lineno, wordno++, c);
+        }
+    }
+
+    // Close the output files
+    fclose(keywords_file);
+    fclose(identifiers_file);
+    fclose(operators_file);
+    fclose(numbers_file);
+    fclose(special_chars_file);
+    fclose(header_file);
+    fclose(f1);
+
+    printf("\nTotal number of lines: %d\n", lineno);
+
+    return 0;
+}
