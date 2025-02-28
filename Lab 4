@@ -1,0 +1,124 @@
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+class LexicalAnalyzer
+{
+    // List of keywords
+    static List<string> keywordList = new List<string>() { "int", "float", "while", "main", "if", "else", "new" };
+
+    // Regular expressions for lexemes
+    static Regex variable_Reg = new Regex(@"^[A-Za-z_][A-Za-z0-9_]*$");
+    static Regex constants_Reg = new Regex(@"^[0-9]+([.][0-9]+)?([e]([+|-])?[0-9]+)?$");
+    static Regex operators_Reg = new Regex(@"^[-*+/><&&||=]$");
+    static Regex special_Reg = new Regex(@"^[.,'\[\]{}();:?]$");
+
+    static void Main()
+    {
+        // Prompt user for input
+        Console.WriteLine("Enter your code (press Enter twice to end input):");
+
+        string userInput = GetUserInput();
+
+        // Call the lexical analyzer function
+        LexicalAnalyzerFunction(userInput);
+    }
+
+    // Method to get multiline input from user
+    static string GetUserInput()
+    {
+        string input = "";
+        string line;
+
+        while (true)
+        {
+            line = Console.ReadLine();
+
+            // Break if the user presses Enter twice to stop input
+            if (string.IsNullOrWhiteSpace(line))
+                break;
+
+            input += line + "\n";
+        }
+
+        return input;
+    }
+
+    static void LexicalAnalyzerFunction(string input)
+    {
+        // Split input into lines
+        string[] lines = input.Split('\n');
+
+        // Output buffer for tokens
+        List<string> tokens = new List<string>();
+
+        // Process each line in the input
+        foreach (var line in lines)
+        {
+            string currentToken = "";
+
+            // Loop through each character in the line
+            for (int i = 0; i < line.Length; i++)
+            {
+                char ch = line[i];
+
+                // Check for a valid lexeme (a token)
+                if (char.IsWhiteSpace(ch) || special_Reg.IsMatch(ch.ToString()))
+                {
+                    if (!string.IsNullOrEmpty(currentToken))
+                    {
+                        ProcessToken(currentToken, tokens);
+                        currentToken = "";
+                    }
+
+                    if (special_Reg.IsMatch(ch.ToString()))
+                    {
+                        tokens.Add($"<punc, {ch}>");
+                    }
+                }
+                else
+                {
+                    currentToken += ch;
+                }
+            }
+
+            // Process the last token in the line
+            if (!string.IsNullOrEmpty(currentToken))
+            {
+                ProcessToken(currentToken, tokens);
+            }
+        }
+
+        // Display tokens
+        Console.WriteLine("Tokens:");
+        foreach (var token in tokens)
+        {
+            Console.WriteLine(token);
+        }
+    }
+
+    static void ProcessToken(string token, List<string> tokens)
+    {
+        // Match the token with regex patterns
+        if (keywordList.Contains(token))
+        {
+            tokens.Add($"<keyword, {token}>");
+        }
+        else if (variable_Reg.IsMatch(token))
+        {
+            tokens.Add($"<var, {token}>");
+        }
+        else if (constants_Reg.IsMatch(token))
+        {
+            tokens.Add($"<constant, {token}>");
+        }
+        else if (operators_Reg.IsMatch(token))
+        {
+            tokens.Add($"<operator, {token}>");
+        }
+        else
+        {
+            Console.WriteLine($"Unknown token: {token}");
+        }
+    }
+}
