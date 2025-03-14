@@ -1,0 +1,7 @@
+C:\Users\ridda\source\repos\LL1Parser\LL1Parser\bin\Debug\LL1Parser.exe.config
+C:\Users\ridda\source\repos\LL1Parser\LL1Parser\bin\Debug\LL1Parser.exe
+C:\Users\ridda\source\repos\LL1Parser\LL1Parser\bin\Debug\LL1Parser.pdb
+C:\Users\ridda\source\repos\LL1Parser\LL1Parser\obj\Debug\LL1Parser.csproj.AssemblyReference.cache
+C:\Users\ridda\source\repos\LL1Parser\LL1Parser\obj\Debug\LL1Parser.csproj.CoreCompileInputs.cache
+C:\Users\ridda\source\repos\LL1Parser\LL1Parser\obj\Debug\LL1Parser.exe
+C:\Users\ridda\source\repos\LL1Parser\LL1Parser\obj\Debug\LL1Parser.pdb
