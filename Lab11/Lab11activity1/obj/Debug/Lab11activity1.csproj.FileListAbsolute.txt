@@ -1,0 +1,7 @@
+D:\CC lab\Lab11activity1\Lab11activity1\bin\Debug\Lab11activity1.exe.config
+D:\CC lab\Lab11activity1\Lab11activity1\bin\Debug\Lab11activity1.exe
+D:\CC lab\Lab11activity1\Lab11activity1\bin\Debug\Lab11activity1.pdb
+D:\CC lab\Lab11activity1\Lab11activity1\obj\Debug\Lab11activity1.csproj.AssemblyReference.cache
+D:\CC lab\Lab11activity1\Lab11activity1\obj\Debug\Lab11activity1.csproj.CoreCompileInputs.cache
+D:\CC lab\Lab11activity1\Lab11activity1\obj\Debug\Lab11activity1.exe
+D:\CC lab\Lab11activity1\Lab11activity1\obj\Debug\Lab11activity1.pdb
