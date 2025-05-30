@@ -1,0 +1,14 @@
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\MiniCompiler.GeneratedMSBuildEditorConfig.editorconfig
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\MiniCompiler.AssemblyInfoInputs.cache
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\MiniCompiler.AssemblyInfo.cs
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\MiniCompiler.csproj.CoreCompileInputs.cache
+D:\CC lab\MiniCompiler\MiniCompiler\bin\Debug\net8.0\MiniCompiler.exe
+D:\CC lab\MiniCompiler\MiniCompiler\bin\Debug\net8.0\MiniCompiler.deps.json
+D:\CC lab\MiniCompiler\MiniCompiler\bin\Debug\net8.0\MiniCompiler.runtimeconfig.json
+D:\CC lab\MiniCompiler\MiniCompiler\bin\Debug\net8.0\MiniCompiler.dll
+D:\CC lab\MiniCompiler\MiniCompiler\bin\Debug\net8.0\MiniCompiler.pdb
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\MiniCompiler.dll
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\refint\MiniCompiler.dll
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\MiniCompiler.pdb
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\MiniCompiler.genruntimeconfig.cache
+D:\CC lab\MiniCompiler\MiniCompiler\obj\Debug\net8.0\ref\MiniCompiler.dll
